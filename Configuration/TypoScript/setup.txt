@@ -1,0 +1,33 @@
+
+plugin.tx_tgmgce {
+	view {
+		templateRootPaths{
+			25 = {$plugin.tx_tgmgce.view.templateRootPath}
+		}
+		partialRootPaths{
+			25 = {$plugin.tx_tgmgce.view.partialRootPath}
+		}
+		layoutRootPaths{
+			25 = {$plugin.tx_tgmgce.view.layoutRootPath}
+		}
+	}
+	persistence {
+		storagePid = {$plugin.tx_tgmgce.persistence.storagePid}
+	}
+	settings{
+		google {
+			apiKey = {$plugin.tx_tgmgce.google.apiKey}
+		}
+		email{
+			sender = {$plugin.tx_tgmgce.email.sender}
+			receiver = {$plugin.tx_tgmgce.email.receiver}
+			confmail = {$plugin.tx_tgmgce.email.confmail}
+		}
+	}
+}
+
+module.tx_tgmgce{
+	google {
+		apiKey = {$plugin.tx_tgmgce.google.apiKey}
+	}
+}

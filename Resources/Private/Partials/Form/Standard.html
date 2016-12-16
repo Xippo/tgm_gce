@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true" >
+<div class="row">
+    <f:form enctype="multipart/form-data" action="formDispatcher" objectName="form">
+        <f:form.hidden property="event" value="{index.originalObject.title}" />
+        <f:form.hidden property="indexUid" value="{index.uid}" />
+        <f:form.hidden property="eventUid" value="{index.originalObject.uid}" />
+        <f:form.hidden property="date" value="{index.startDate -> f:format.date(format: 'd.m.Y')}" />
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Name</label>
+                <f:form.textfield property="name" class="form-control"/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Surname</label>
+                <f:form.textfield property="surname" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Tel</label>
+                <f:form.textfield property="tel" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>email</label>
+                <f:form.textfield property="email" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Street</label>
+                <f:form.textfield property="street" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>City</label>
+                <f:form.textfield property="city" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Zip</label>
+                <f:form.textfield property="zip" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-12">
+            <f:form.submit value="send" class="btn btn-primary"/>
+        </div>
+    </f:form>
+</div>
+
+</html>

@@ -1,0 +1,4 @@
+<h3>{event.originalObject.title}</h3>
+<div class="time"><f:render partial="Date/Static" arguments="{index:event}" /></div>
+<div class='descr'><f:format.html><f:format.crop maxCharacters="150">{index.originalObject.description}</f:format.crop></f:format.html></div>
+<f:link.action pageUid="{settings.flex.event.detail}" action="show" arguments="{index:event}"><f:translate key="more" /></f:link.action>

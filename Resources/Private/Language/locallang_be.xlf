@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-11-14T16:14:42Z" product-name="tgm_gce">
+		<header/>
+		<body>
+			<trans-unit id="tx_tgmgce_flex.view.list">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.view.list">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.view.map">
+				<source>Map view, with the next upcoming events</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.input.backPid">
+				<source>Back link target</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.view">
+				<source>View</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.paginationHide">
+				<source>Hide pagination</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.input.detail">
+				<source>PID for the Detail view</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.group">
+				<source>Show events only from the selected groups</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.group.conjunction">
+				<source>Select the conjunction for groups </source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.categories.conjunction">
+                <source>Select the conjunction for categories</source>
+            </trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.categoriesAndGroups.conjunction">
+                <source>Select the conjunction between categories and groups</source>
+            </trans-unit>
+			<trans-unit id="tx_tgmgce_flex.conjunction.and">
+                <source>AND</source>
+            </trans-unit>
+			<trans-unit id="tx_tgmgce_flex.conjunction.or">
+                <source>OR</source>
+            </trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.categories">
+				<source>Show events only from this categories (and the selected group if one ist choosen)</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.input.limit">
+				<source>How many events should be listed (empty = 999)</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.select">
+				<source>Select</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.map">
+				<source>Map settings</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.map.lat">
+				<source>Latitude for the map center point</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.map.lon">
+				<source>Longitude for the map center point</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.map.zoom">
+				<source>Zoom level</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.map.width">
+				<source>Width (add px or %)</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.map.height">
+				<source>Height (px)</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.view.show">
+				<source>Detail</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

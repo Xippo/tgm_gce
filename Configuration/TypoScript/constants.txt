@@ -1,0 +1,32 @@
+# customsubcategory=google=Google
+# customsubcategory=email=E-Mail Settings
+plugin.tx_tgmgce {
+	google {
+		# cat=plugin.tx_tgmgce_main/google; type=string; label=API Key
+		apiKey =
+	}
+
+	email{
+		# cat=plugin.tx_tgmgce_main/email; type=string; label=Standard Receiver: (Will be used when no e-mail is set in the event)
+		receiver =
+		# cat=plugin.tx_tgmgce_main/email; type=string; label=Sender E-Mail
+		sender = automailer@domain.com
+		# cat=plugin.tx_tgmgce_main/email; type=boolean; label=Send confirmation to the costumer
+		confmail =
+
+	}
+
+	view {
+		# cat=plugin.tx_tgmgce_main/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:tgm_gce/Resources/Private/Templates/
+		# cat=plugin.tx_tgmgce_main/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:tgm_gce/Resources/Private/Partials/
+		# cat=plugin.tx_tgmgce_main/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:tgm_gce/Resources/Private/Layouts/
+	}
+
+	persistence {
+		# cat=plugin.tx_tgmgce_main//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

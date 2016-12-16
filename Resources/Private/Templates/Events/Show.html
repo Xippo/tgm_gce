@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xmlns:f="http://xsd.helmut-hummel.de/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true" >
+<f:layout name="Default" />
+<f:section name="main">
+  <h1>{index.originalObject.title}</h1>
+  <div class="event-info">
+      <div class="row">
+        <div class="{f:if(then: 'col-md-6' , else: 'col-md-12', condition: index.originalObject.image)}">
+          <div class="date">
+            <i class="fa fa-clock-o" aria-hidden="true"></i> <f:render partial="Date/Static" arguments="{index:index}" />
+          </div>
+          <div class="location">
+            <i class="fa fa-map-marker" aria-hidden="true"></i> {index.originalObject.street}, {index.originalObject.zip} {index.originalObject.city}
+          </div>
+        </div>
+          <f:if condition="{index.originalObject.image}">
+            <div class="col-md-6">
+              <f:image image="{index.originalObject.image}" class="img-responsive"/>
+            </div>
+          </f:if>
+      </div>
+  </div>
+  <div class="descr">
+      <h3><f:translate key="tx_tgmgce_domain_model_events.description" />:</h3>
+      <f:format.html>{index.originalObject.description}</f:format.html>
+  </div>
+  <f:if condition="{index.originalObject.form}">
+    <f:if condition="{formSent}">
+      <f:then>
+        <f:comment>check if the form was send or not</f:comment>
+        <f:if condition="{formSent} > 0">
+          <f:then>
+            <div class="success"> <f:translate key="mail.success" /> </div>
+          </f:then>
+          <f:else>
+            <div class="error"> <f:translate key="mail.error" /> </div>
+          </f:else>
+        </f:if>
+      </f:then>
+      <f:else>
+        <f:render partial="Form/{index.originalObject.form}" arguments="{index:index}"/>
+      </f:else>
+    </f:if>
+  </f:if>
+  <div id="map" style="height:{settings.flex.map.height}px; width:{settings.flex.map.width};"></div>
+  <f:link.action action="list" pageUid="{settings.flex.event.backPid}"><f:translate key="back"/></f:link.action>
+</f:section>
+</html>

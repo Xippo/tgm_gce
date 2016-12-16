@@ -1,0 +1,15 @@
+config.tx_extbase{
+    persistence {
+        classes {
+            TGM\TgmGce\Domain\Model\Index {
+                mapping {
+                    tableName = tx_calendarize_domain_model_index
+                    recordType = Tx_YourExt_Category
+                }
+            }
+        }
+    }
+    objects {
+        HDNET\Calendarize\Domain\Model\Index.className = TGM\TgmGce\Domain\Model\Index
+    }
+}
