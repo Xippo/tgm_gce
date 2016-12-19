@@ -23,7 +23,7 @@ class tx_tgmgce_tcemainproc {
 
 				/** @var \TGM\TgmGce\Domain\Model\Events $event */
 				$event = $eventRepository->findByUid($id);
-				if(($coords = \TGM\TgmGce\Utility\GeoGoogleUtility::getCoordsFromGoogle($event->getZip(), $event->getCity(), $event->getStreet())) !== FALSE) {
+				if(($coords = \TGM\TgmGce\Utility\GeoGoogleUtility::getCoordsFromGoogle($event->getZip(), $event->getCity(), $event->getStreet(), $event->getCountry())) !== FALSE) {
 					$event->setLat($coords['lat']);
 					$event->setLon($coords['lng']);
 					$eventRepository->update($event);

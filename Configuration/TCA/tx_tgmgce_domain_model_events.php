@@ -19,14 +19,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,description,image,form,form_receiver_mail,name,surname,email,salutation,tel,street,zip,city,lon,lat,gruppe,',
+		'searchFields' => 'title,description,image,form,form_receiver_mail,name,surname,email,salutation,tel,street,zip,city,lon,lat,gruppe,country,',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('tgm_gce') . 'Resources/Public/Icons/tx_tgmgce_domain_model_events.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, image, form, form_receiver_mail, name, surname, email, salutation, tel, street, zip, city, lon, lat, gruppe,categories',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, image, form, form_receiver_mail, name, surname, email, salutation, tel, street, zip, city, country, lon, lat, gruppe, categories,',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description;;;richtext:rte_transform[mode=ts_links], image, form, form_receiver_mail, name, surname, email,salutation, tel, street, zip, city, lon, lat, gruppe,--div--;LLL:EXT:tgm_gce/Resources/Private/Language/locallang_db.xlf:tx_tgmgce_domain_model_events.date,calendarize, calendarize_info, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime,'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description;;;richtext:rte_transform[mode=ts_links], image, gruppe, --div--;LLL:EXT:tgm_gce/Resources/Private/Language/locallang_db.xlf:tx_tgmgce_domain_model_events.contact, salutation, name, surname, email, tel,  --div--;LLL:EXT:tgm_gce/Resources/Private/Language/locallang_db.xlf:tx_tgmgce_domain_model_events.location, street, zip, city, country, lon, lat,--div--;LLL:EXT:tgm_gce/Resources/Private/Language/locallang_db.xlf:tx_tgmgce_domain_model_events.form, form, form_receiver_mail ,--div--;LLL:EXT:tgm_gce/Resources/Private/Language/locallang_db.xlf:tx_tgmgce_domain_model_events.date,calendarize, calendarize_info, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime,'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -293,6 +293,17 @@ return array(
 				'eval' => 'trim,required'
 			),
 		),
+        'country' => array(
+            'exclude' => 1,
+            'label' => 'LLL:EXT:tgm_gce/Resources/Private/Language/locallang_db.xlf:tx_tgmgce_domain_model_events.country',
+            'config' => array(
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'itemsProcFunc' => 'TGM\TgmGce\Backend\ItemsProcFuncs\Country->itemsProcFunc',
+                'size' => 1,
+                'maxitems' => 1,
+            )
+        ),
 		'lon' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:tgm_gce/Resources/Private/Language/locallang_db.xlf:tx_tgmgce_domain_model_events.lon',

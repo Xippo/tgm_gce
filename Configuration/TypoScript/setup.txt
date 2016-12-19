@@ -17,6 +17,7 @@ plugin.tx_tgmgce {
 	settings{
 		google {
 			apiKey = {$plugin.tx_tgmgce.google.apiKey}
+			countrys = {$plugin.tx_tgmgce.google.countries}
 		}
 		email{
 			sender = {$plugin.tx_tgmgce.email.sender}
@@ -29,5 +30,6 @@ plugin.tx_tgmgce {
 module.tx_tgmgce{
 	google {
 		apiKey = {$plugin.tx_tgmgce.google.apiKey}
+		countries = {$plugin.tx_tgmgce.google.countries}
 	}
 }

@@ -21,6 +21,12 @@
 			<trans-unit id="tx_tgmgce_domain_model_events.form">
 				<source>Form</source>
 			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.contact">
+				<source>Contact</source>
+			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.form.empty">
 				<source>No Form</source>
 			</trans-unit>
@@ -53,6 +59,9 @@
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.city">
 				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.country">
+				<source>Country</source>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.lon">
 				<source>Lon</source>
