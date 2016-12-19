@@ -57,7 +57,7 @@ TgM Google Calenderize Events
 	User/Index
 	Administrator/Index
 	Configuration/Index
-	Developer/Index
+	DeveloperManual/Index
 	KnownProblems/Index
 	ToDoList/Index
 	ChangeLog/Index
