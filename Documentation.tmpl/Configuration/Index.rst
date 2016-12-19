@@ -57,7 +57,6 @@ Setup your path to your templates:
 			}
 		}
 	}
-..
 
 then under partial you have to create a ListItem.html, here you can use the same ListItem.html you use for the list view from gce events. So you have todo the work only one time and you have the same style.
 But you have to change the link action a bit, it should be like that:
@@ -96,7 +95,7 @@ To add a custom form you need only to add the item via pageTsConfig
 TCEFORM.tx_tgmgce_domain_model_events.form{
    addItems.newform = new form
 }
-..
+
 and than you need to add the form template Partials/Form/Newform.html
 **!!important:**
 #. The form action must be formDispatcher and the objectName must be form like the standard form.
