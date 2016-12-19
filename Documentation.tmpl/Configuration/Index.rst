@@ -101,7 +101,7 @@ and than you need to add the form template Partials/Form/Newform.html
 
 **!!important:**
 
-# The form action must be formDispatcher and the objectName must be form like the standard form.
-# If you will send a confirmation mail you need the field email
+- The form action must be formDispatcher and the objectName must be form like the standard form.
+- If you will send a confirmation mail you need the field email
 
 
