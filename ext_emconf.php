@@ -12,13 +12,13 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'TgM Google Calendarize Events',
-	'description' => 'This extension allows you to create events and gives you the possibilty to show the created events on google map.',
+	'description' => 'This extension allows you to create events and gives you the possibility to show the created events on google map.',
 	'category' => 'plugin',
 	'author' => 'Oliver Pfaff',
 	'author_email' => 'op@teamgeist-medien.de',
 	'state' => 'alpha',
 	'internal' => '',
-	'uploadfolder' => '1',
+	'uploadfolder' => '0',
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
 	'version' => '0.0.1',
