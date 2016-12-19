@@ -92,11 +92,13 @@ Add a custom form
 To add a custom form you need only to add the item via pageTsConfig
 
 .. code-block:: typoscript
+
 TCEFORM.tx_tgmgce_domain_model_events.form{
    addItems.newform = new form
 }
 
 and than you need to add the form template Partials/Form/Newform.html
+
 **!!important:**
 #. The form action must be formDispatcher and the objectName must be form like the standard form.
 #. If you will send a confirmation mail you need the field email
