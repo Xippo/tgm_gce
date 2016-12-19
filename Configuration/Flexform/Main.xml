@@ -23,10 +23,12 @@
                                         <numIndex index="0">LLL:EXT:tgm_gce/Resources/Private/Language/locallang_be.xlf:tx_tgmgce_flex.view.list</numIndex>
                                         <numIndex index="1">Events->list</numIndex>
                                     </numIndex>
+                                    <!--
                                     <numIndex index="2" type="array">
                                         <numIndex index="0">LLL:EXT:tgm_gce/Resources/Private/Language/locallang_be.xlf:tx_tgmgce_flex.view.map</numIndex>
                                         <numIndex index="1">Events->map</numIndex>
                                     </numIndex>
+                                    -->
                                     <numIndex index="3" type="array">
                                         <numIndex index="0">LLL:EXT:tgm_gce/Resources/Private/Language/locallang_be.xlf:tx_tgmgce_flex.view.show</numIndex>
                                         <numIndex index="1">Events->show;Events->formDispatcher</numIndex>

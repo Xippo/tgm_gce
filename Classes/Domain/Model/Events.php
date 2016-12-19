@@ -324,7 +324,8 @@ class Events extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getForm()
     {
-        return $this->form;
+        $uppercase = ucfirst($this->form);
+        return $uppercase;
     }
     
     /**

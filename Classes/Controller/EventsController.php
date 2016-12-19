@@ -134,7 +134,7 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @param array $form
      */
     public function formDispatcherAction($form){
-        //TODO add Signal to perform db Stuff
+        //TODO add Signal so somebody can perform db Stuff if he want
         /** @var \TGM\TgmGce\Domain\Model\Events $event */
         $event = $this->eventsRepository->findByUid((int)$form['eventUid']);
 

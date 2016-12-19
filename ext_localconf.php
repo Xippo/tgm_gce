@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'TGM.' . $_EXTKEY,
 	'Main',
 	array(
-		'Events' => 'list, show, map',
+		'Events' => 'list, show',
 		
 	),
 	// non-cacheable actions

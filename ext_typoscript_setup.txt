@@ -4,7 +4,6 @@ config.tx_extbase{
             TGM\TgmGce\Domain\Model\Index {
                 mapping {
                     tableName = tx_calendarize_domain_model_index
-                    recordType = Tx_YourExt_Category
                 }
             }
         }
