@@ -22,8 +22,7 @@ What does it do?
 - You can add quite easily a fluid form to your event. Its fluid, so you can customize it at pleasure.
 - The E-Mail templates (receiver,costumer), for the event forms, are fluid as well and are fully customizable.
 - The Google map that shows the events can be used standalone.
-- You can add some costum group (like a tag) to your event and than filter by that in the plugin
-e.g. you have one group of events for London and one for Manchester. In that case you can use two plugins and show the events distinctly
+- You can add some costum group (like a tag) to your event and than filter by that in the plugin. E.g. you have one group of events for London and one for Manchester. In that case you can use two plugins and show the events distinctly.
 - The Plugins can filter the events by TYPO3 categories
 
 .. _screenshots:
