@@ -99,6 +99,7 @@ TCEFORM.tx_tgmgce_domain_model_events.form {
    addItems.newform = new form
 }
 
+..
 and than you need to add the form template Partials/Form/Newform.html
 
 **!!important:**
