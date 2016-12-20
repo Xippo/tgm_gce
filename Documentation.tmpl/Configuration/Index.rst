@@ -58,11 +58,13 @@ Setup your path to your templates:
 		}
 	}
 
-then under partial you have to create a ListItem.html, here you can use the same ListItem.html you use for the list view from gce events. So you have todo the work only one time and you have the same style.
+then under partial you have to create a ListItem.html. You can use the same ListItem.html you use for the list view from gce events. So you have todo the work only one time and you have the same style.
 But you have to change the link action a bit, it should be like that:
 
 .. code-block:: typoscript
+
 	<f:link.action pageUid="{settings.detailPid}" pluginName="main" extensionName="tgmGce" action="show" controller="Events" arguments="{index:index}"><f:translate key="LLL:EXT:myext/Resources/Private/Language/locallang.xlf:show_event" /></f:link.action>
+
 .. hint:: use the same link.action on other default calendarize templates if you want to link on the gce show action
 
 .. _configuration-email:
