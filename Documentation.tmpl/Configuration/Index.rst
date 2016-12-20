@@ -95,9 +95,9 @@ To add a custom form you need only to add the item via pageTsConfig
 
 .. code-block:: typoscript
 
-TCEFORM.tx_tgmgce_domain_model_events.form {
-   addItems.newform = new form
-}
+    TCEFORM.tx_tgmgce_domain_model_events.form {
+        addItems.newform = new form
+    }
 
 ..
 and than you need to add the form template Partials/Form/Newform.html
