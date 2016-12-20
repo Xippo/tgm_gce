@@ -78,12 +78,12 @@ You can change the template form the default form like a normal fluid template.
 
 Costumer E-Mail template
 ^^^^^^^^^^^^^^^^^^^^^^^^
-You will find the Costumer E-Mail template under Templates/nameOfTheForm/Customer. Here you have the fluid object "{formEntrys}" here are stored all the data from the form.
+You will find the costumer E-Mail template under Templates/nameOfTheForm/Customer. Here you have the fluid object "{formEntrys}" here are stored all the data from the form.
 If you need one for the default form you have to add it.
 
 Activate Costumer E-Mail
 ^^^^^^^^^^^^^^^^^^^^^^^^
-To enable the Costumer E-mail you have to activate the checkbox in the typoscriot constants "Send confirmation to the costumer" and your from must have a field with the name email
+To enable the costumer E-Mail you have to activate the checkbox in the typoscript constants "Send confirmation to the costumer" and your from must have a field with the name email
 
 .. _configuration-addCustomForm:
 
@@ -93,7 +93,7 @@ To add a custom form you need only to add the item via pageTsConfig
 
 .. code-block:: typoscript
 
-TCEFORM.tx_tgmgce_domain_model_events.form{
+TCEFORM.tx_tgmgce_domain_model_events.form {
    addItems.newform = new form
 }
 

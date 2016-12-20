@@ -11,15 +11,6 @@
 Administrator Manual
 ====================
 
-Target group: **Administrators**
-
-Describes how to manage the extension from an administrator point of view.
-That relates to Page/User TSconfig, permissions, configuration etc.,
-which administrator level users have access to.
-
-Language should be non / semi-technical, explaining, using small examples.
-
-
 .. _admin-installation:
 
 Installation

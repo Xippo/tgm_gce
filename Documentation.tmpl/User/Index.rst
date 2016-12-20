@@ -11,57 +11,19 @@
 Users Manual
 ============
 
-Target group: **Editors**
 
-Here should be described how to use the extension from the editor perspective.
+Create your first event
+-----------------------
+When you have finished the configuration it is quite simple add your events.
+- Go to your sysfolder where your events should be stored.
+- Then switch to the list module and then add a new record.
+- Then click on the events icon
 
-- How does it work?
+.. figure:: ../Images/User/create_event_icon.png
+   :width: 250px
+   :alt: Events Icon
 
-  - works well when doing this.
+   Event Icon (caption of the image)
 
-  - does not work so well when doing that
-    but we can live with it.
-
-  - **mind indentation when nesting lists**.
-
-- How to install the plugin on a web page?
-
-- What options are available?
-
-Language should be non-technical, explaining, using small examples.
-Don't use to many acronyms unless they have been explained.
-Don't be confusing by putting information targeting administrators.
-
-.. tip::
-
-   Take a break from time to time.
-
-Admonitions should be used to warn the users about potential
-pitfalls, attract their attention to important elements
-or just add some notes for for information (further reading,
-for example).
-
-.. important::
-
-   Remember to always say "please" when asking your software to
-   do something.
-
-Provide screenshots as needed for making things clear. When creating
-screenshots, try using the `Introduction Package <http://demo.typo3.org/>`_
-as a neutral TYPO3 CMS instance.
-
-.. figure:: ../Images/UserManual/BackendView.png
-   :width: 500px
-   :alt: Backend view
-
-   Default Backend view (caption of the image)
-
-   The Backend view of TYPO3 after the user has clicked on module "Page". (legend of the image)
-
-
-.. _user-faq:
-
-FAQ
----
-
-Possible subsection: FAQ
+Now you should be in the event mask, here you have to fill all fields marked as required(red icons) after that you can save the record.
+Now the event should be listed.

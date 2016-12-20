@@ -20,7 +20,7 @@ return array(
 			'endtime' => 'endtime',
 		),
 		'searchFields' => 'title,description,image,form,form_receiver_mail,name,surname,email,salutation,tel,street,zip,city,lon,lat,gruppe,country,',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('tgm_gce') . 'Resources/Public/Icons/tx_tgmgce_domain_model_events.gif'
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('tgm_gce') . 'Resources/Public/Icons/calendar.png'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, image, form, form_receiver_mail, name, surname, email, salutation, tel, street, zip, city, country, lon, lat, gruppe, categories,',

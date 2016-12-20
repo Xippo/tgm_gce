@@ -21,4 +21,8 @@ Links
 	https://github.com/<username>/<extension key>
 
 :Contact:
-	`@<username> <https://twitter.com/your-username>`__
+	op@teamgeist-medien.de
+
+:Credits:
+    Calendar Icon made by Freepik from www.flaticon.com
+
