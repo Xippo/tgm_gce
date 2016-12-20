@@ -11,7 +11,6 @@
 Users Manual
 ============
 
-
 Create your first event
 -----------------------
 When you have finished the configuration it is quite simple add your events.
