@@ -3,8 +3,11 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2016-11-14T16:14:42Z" product-name="tgm_gce">
 		<header/>
 		<body>
-			<trans-unit id="tx_tgmgce_flex.view.list">
-				<source>List</source>
+			<trans-unit id="tx_tgmgce_flex.general">
+				<source>General Settings</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter">
+				<source>Filter Settings</source>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_flex.view.list">
 				<source>List</source>
@@ -27,6 +30,12 @@
 			<trans-unit id="tx_tgmgce_flex.filter.group">
 				<source>Show events only from the selected groups</source>
 			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.plug_filter.group">
+				<source>Activate group filter</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.plug_filter.override.group">
+                <source>The output from the other GCE plugins, on this page, will show only events with this group.</source>
+            </trans-unit>
 			<trans-unit id="tx_tgmgce_flex.filter.group.conjunction">
 				<source>Select the conjunction for groups </source>
 			</trans-unit>
@@ -44,6 +53,18 @@
             </trans-unit>
 			<trans-unit id="tx_tgmgce_flex.filter.categories">
 				<source>Show events only from this categories (and the selected group if one ist choosen)</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.plug_filter.category">
+				<source>Activate category filter</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.plug_filter.categories">
+				<source>Which categories should be selectable in the FE filter</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.plug_filter.groups">
+				<source>Which groups should be selectable in the FE filter</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.plug_filter.override.category">
+				<source>The output from the other GCE plugins, on this page, will show only events with this category. You can select only one.</source>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_flex.input.limit">
 				<source>How many events should be listed (empty = 999)</source>
@@ -71,6 +92,18 @@
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_flex.view.show">
 				<source>Detail</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.view.filter">
+				<source>List view with filter</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.groups">
+				<source>Show group filter</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.cats">
+				<source>Show category filter</source>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_flex.filter.override">
+				<source>Override the initial output from the other views</source>
 			</trans-unit>
 		</body>
 	</file>

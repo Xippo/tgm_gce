@@ -1,5 +1,8 @@
 <f:layout name="Default" />
 
 <f:section name="main">
+	<f:if condition="{filter.data}">
+		<f:render partial="Events/Filter" arguments="{filter: filter}" />
+	</f:if>
 	<f:render partial="Events/List" arguments="{settings: settings, indices: indices}" />
 </f:section>

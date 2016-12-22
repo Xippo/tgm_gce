@@ -12,7 +12,7 @@ if (!defined('TYPO3_MODE')) {
 	),
 	// non-cacheable actions
 	array(
-		'Events' => 'formDispatcher',
+		'Events' => 'formDispatcher, filter',
 	)
 );
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
@@ -40,12 +40,13 @@ $configuration = [
 
 /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
 $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
-
+/*
 $signalSlotDispatcher->connect(
     \HDNET\Calendarize\Domain\Repository\IndexRepository::class,
     'getDefaultConstraints',
     \TGM\TgmGce\Controller\EventsController::class,
     'limitConstraintWhenFilteredOptionsAreSetSlot'
 );
+*/
 //Register Hook
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:tgm_gce/Classes/Hooks/class.tx_tgmgce_tcemainproc.php:tx_tgmgce_tcemainproc';

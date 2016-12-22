@@ -328,9 +328,12 @@ return array(
 			'config' => array(
 				'type' => 'select',
 				'renderType' => 'selectSingle',
+                'items' => [
+                    ['no group',0]
+                ],
 				'foreign_table' => 'tx_tgmgce_domain_model_eventgroup',
 				'minitems' => 0,
-				'maxitems' => 1,
+				'maxitems' => 99,
 			),
 		),
         'categories' => [

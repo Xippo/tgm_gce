@@ -51,7 +51,6 @@ class EventsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $filterConstraints
         ));
         return $query->execute($raw);
-
     }
 
     /**

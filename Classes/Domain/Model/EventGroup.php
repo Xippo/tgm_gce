@@ -30,7 +30,7 @@ namespace TGM\TgmGce\Domain\Model;
 /**
  * EventGroup
  */
-class EventGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractValueObject
+class EventGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**

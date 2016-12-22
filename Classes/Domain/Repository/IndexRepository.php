@@ -5,16 +5,7 @@
  */
 namespace TGM\TgmGce\Domain\Repository;
 
-use Exception;
-use HDNET\Calendarize\Domain\Model\Index;
-use HDNET\Calendarize\Register;
 use HDNET\Calendarize\Utility\DateTimeUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\BackendConfigurationManager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Index repository
@@ -40,4 +31,22 @@ class IndexRepository extends \HDNET\Calendarize\Domain\Repository\IndexReposito
         }
         return $query->execute();
     }
+
+    /**
+     * @param array $uids
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findByEventUids($uids,$limit = NULL)
+    {
+        $query = $this->createQuery();
+        $constraints[] = $query->in('foreign_uid', $uids);
+        $now = DateTimeUtility::getNow();
+        $this->addTimeFrameConstraints($constraints,$query,$now->getTimestamp());
+        if($limit){
+            $query->setLimit($limit);
+        }
+        return $this->matchAndExecute($query,$constraints);
+    }
 }
+
+

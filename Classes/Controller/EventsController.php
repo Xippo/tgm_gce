@@ -26,6 +26,7 @@ namespace TGM\TgmGce\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Symfony\Component\Debug\Debug;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -53,32 +54,69 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected $indexRepository = NULL;
 
+
+    /**
+     * @param array $filter
+     */
+    public function filterAction($filter = NULL)
+    {
+        if($filter){
+            $this->redirect('list',null,null,array('filter'=>$filter));
+        }
+        $this->forward('list');
+    }
     /**
      * action list
      *
+     * @param array $filter
      * @return void
      */
-    public function listAction()
+    public function listAction($filter = NULL)
     {
-        $settings = $this->settings;
         $limit = 999;
+        $settings = $this->settings;
+        $filter['data'] = $this->getFilterData($settings);
 
-        //$events = $this->eventsRepository->findAll();
         if(!empty($settings['flex']['event']['itemLimit'])){
             $limit = (int)$settings['flex']['event']['itemLimit'];
-
         }
-        $indices = $this->indexRepository->findList($limit);
 
+        //Override default plugin Settings with filter stuff
+        if(!empty($filter['category'])){
+            //override settings
+            $settings['flex']['filter']['categories'] = $filter['category'];
+        }
+        if(!empty($filter['group'])){
+            //override settings
+            $settings['flex']['filter']['group'] = $filter['group'];
+        }
+
+        //Filter the events by plugins settings or FE filter override
+        if(!empty($settings['flex']['filter']['group']) || !empty($settings['flex']['filter']['categories'])){
+            //get the right uids from our event repo -> here we do the filter magic
+            $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
+            //Set the right indexIds
+            foreach ($filteredEvents as $event){
+                $uids[] = $event['uid'];
+            }
+            if(count($uids) > 0){
+                $indices = $this->indexRepository->findByEventUids($uids,$limit);
+            }
+        }else{
+            $indices = $this->indexRepository->findList($limit);
+        }
         $this->view->assignMultiple(array(
             'indices' => $indices,
-            'settings' => $settings
+            'settings' => $settings,
+            'filter' => $filter
         ));
     }
 
+    //TODO Improve filter handling, maybe find some other way to do it
     public function mapAction()
     {
         $settings = $this->settings;
+        $settings = $this->getMapFilterRestriction($settings);
         if(!empty($settings['flex']['filter']['group']) || !empty($settings['flex']['filter']['categories'])){
             $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
             //Set the right indexIds
@@ -95,6 +133,22 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->view->assignMultiple(array(
             'map' => $settings['flex']['map']
         ));
+    }
+
+    protected function getMapFilterRestriction($settings)
+    {
+        //Get arguments from main plugin
+        $argumentsMainPlugin = GeneralUtility::_GP('tx_tgmgce_main');
+        //override default plugin filter settings
+        if(!empty($argumentsMainPlugin['filter'])){
+            if(!empty($argumentsMainPlugin['filter']['category'])){
+               $settings['flex']['filter']['categories'] = $argumentsMainPlugin['filter']['category'];
+            }
+            if(!empty($argumentsMainPlugin['filter']['group'])){
+               $settings['flex']['filter']['group'] = $argumentsMainPlugin['filter']['group'];
+            }
+        }
+        return $settings;
     }
 
     /**
@@ -116,12 +170,7 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $settings = $this->settings;
         $this->createGoogleMap($settings,$index);
-        /*
-        if($formSent !== null){
-            //Clear the cache again, so we can rebuild the cache after the msg rendering
-            $this->cacheService->clearPageCache($GLOBALS['TSFE']->id);
-        }
-        */
+
         $this->view->assignMultiple([
             'index' => $index,
             'settings' => $settings,
@@ -129,7 +178,34 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         ]);
     }
 
+    protected function getFilterData($settings){
+        //Check if we need and we have category data
+        if(!empty($settings['flex']['PlugFilter']['categories']) && !empty($settings['flex']['PlugFilter']['category'])){
+            /** @var \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository $catRepo */
+            $catRepo = $this->objectManager->get(\TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository::class);
+            $cats = $catRepo->findAll();
+            $categories = explode(',',$settings['flex']['PlugFilter']['categories']);
+            foreach ($cats as $category){
+                if(in_array($category->getUid(),$categories)){
+                    $filterCats[] = $category;
+                }
+            }
+            $filter['category'] = $filterCats;
+        }
 
+        //Check if we need and we have group data
+        if(!empty($settings['flex']['PlugFilter']['groups']) && !empty($settings['flex']['PlugFilter']['group'])){
+            /** @var \TGM\TgmGce\Domain\Repository\EventGroupRepository $eventGrpRepo */
+            $eventGrpRepo = $this->objectManager->get(\TGM\TgmGce\Domain\Repository\EventGroupRepository::class);
+            $groups = $eventGrpRepo->findByList($settings['flex']['PlugFilter']['groups']);
+            $filter['groups'] = $groups;
+        }
+
+        if(!empty($filter)){
+            return $filter;
+        }
+        return false;
+    }
     /**
      * @param array $form
      */
@@ -172,30 +248,6 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             'index' => $index,
             'formSent' => $mailSent
         ));
-    }
-
-    //TODO Investigate weird behavior(Smells like a bug): i dont get any arguments from the signal. The argument is always empty also when i force some argument directly in the calendarize code.
-    /**
-     * @param array $arguments
-     * @return mixed
-     */
-    public function limitConstraintWhenFilteredOptionsAreSetSlot($arguments){
-        //Standard signal Arguments -> i still dont know why they are always empty
-        $arguments['indexIds'] = [];
-        $arguments['indexTypes'] = [];
-        $arguments['additionalSlotArguments'] = [];
-
-        $settings = $this->settings;
-        //if we need to filter something
-        if(!empty($settings['flex']['filter']['group']) || !empty($settings['flex']['filter']['categories'])){
-            //get the right uids from our event repo -> here we do the filter magic
-            $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
-            //Set the right indexIds
-            foreach ($filteredEvents as $event){
-                $arguments['indexIds'][] = $event['uid'];
-            }
-        }
-        return $arguments;
     }
 
     /**

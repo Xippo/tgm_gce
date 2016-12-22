@@ -1,0 +1,13 @@
+<f:form action="filter" name="filter" object="{filter}" method="post">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <f:form.select property="category" class="form-control" prependOptionLabel="Category" optionLabelField="title" optionValueField="uid" options="{filter.data.category}" />
+        </div>
+        <div class="form-group col-md-4">
+            <f:form.select property="group" class="form-control" prependOptionLabel="Group" optionLabelField="name" optionValueField="uid" options="{filter.data.groups}" />
+        </div>
+        <div class="form-group col-md-4">
+            <f:form.submit value="Filtern"/>
+        </div>
+    </div>
+</f:form>
