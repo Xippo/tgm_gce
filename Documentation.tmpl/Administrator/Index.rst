@@ -44,8 +44,8 @@ Typoscript Configuration
 ------------------------
 In the Typoscript constants you can set:
 
-#. The default receiver for the form evaluation E-Mail (email is used if no one is set in the event self but the event has still a form attached)
-#. The default form sender E-Mail (e.g automailer@domain.com)
-#. You can choose if after the submit of the event form it should be send a conformation mail to the costumer
-#. You can enter your google API key, it seems to work also without it.
-#. You can setup different country codes
+# The default receiver for the form evaluation E-Mail (email is used if no one is set in the event self but the event has still a form attached)
+# The default form sender E-Mail (e.g automailer@domain.com)
+# You can choose, if after the submit of the event form, it should be send a conformation mail to the costumer
+# You can enter your google API key, it seems to work also without it.
+# You can setup different country codes
