@@ -264,8 +264,8 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         if(is_array($events)){
             $mapJs ='
-            function initMap() {
-                var gm = google.maps
+                function initMap() {
+                var gm = google.maps;
                 // Create a map object and specify the DOM element for display.
                 var map = new google.maps.Map(document.getElementById("map"), {
                         center: {lat: '. $settings['flex']['map']['lat'] .', lng: ' .$settings['flex']['map']['lon']. '},

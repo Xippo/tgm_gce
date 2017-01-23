@@ -164,6 +164,7 @@
                             </label>
                             <config>
                                 <type>input</type>
+                                <eval>required</eval>
                             </config>
                         </TCEforms>
                     </settings.flex.map.lat>
@@ -174,6 +175,7 @@
                             </label>
                             <config>
                                 <type>input</type>
+                                <eval>required</eval>
                             </config>
                         </TCEforms>
                     </settings.flex.map.lon>
@@ -184,6 +186,7 @@
                             </label>
                             <config>
                                 <type>input</type>
+                                <eval>required</eval>
                             </config>
                         </TCEforms>
                     </settings.flex.map.zoom>
@@ -194,6 +197,7 @@
                             </label>
                             <config>
                                 <type>input</type>
+                                <eval>required</eval>
                             </config>
                         </TCEforms>
                     </settings.flex.map.height>
@@ -204,6 +208,7 @@
                             </label>
                             <config>
                                 <type>input</type>
+                                <eval>required</eval>
                             </config>
                         </TCEforms>
                     </settings.flex.map.width>
