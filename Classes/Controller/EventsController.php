@@ -26,6 +26,7 @@ namespace TGM\TgmGce\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use HDNET\Calendarize\Domain\Model\Index;
 use Symfony\Component\Debug\Debug;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -81,7 +82,7 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $limit = (int)$settings['flex']['event']['itemLimit'];
         }
 
-        //Override default plugin Settings with filter stuff
+        //Override default plugin Settings with filter stuff from FE
         if(!empty($filter['category'])){
             //override settings
             $settings['flex']['filter']['categories'] = $filter['category'];
@@ -91,20 +92,16 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $settings['flex']['filter']['group'] = $filter['group'];
         }
 
-        //Filter the events by plugins settings or FE filter override
-        if(!empty($settings['flex']['filter']['group']) || !empty($settings['flex']['filter']['categories'])){
-            //get the right uids from our event repo -> here we do the filter magic
-            $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
-            //Set the right indexIds
-            foreach ($filteredEvents as $event){
-                $uids[] = $event['uid'];
-            }
-            if(count($uids) > 0){
-                $indices = $this->indexRepository->findByEventUids($uids,$limit);
-            }
-        }else{
-            $indices = $this->indexRepository->findList($limit);
+        //get the right uids from our event repo -> here we do the filter magic
+        $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
+        //Set the right indexIds
+        foreach ($filteredEvents as $event){
+            $uids[] = $event['uid'];
         }
+        if(count($uids) > 0){
+            $indices = $this->indexRepository->findByEventUids($uids,$limit);
+        }
+
         $this->view->assignMultiple(array(
             'indices' => $indices,
             'settings' => $settings,
@@ -112,24 +109,23 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         ));
     }
 
-    //TODO Improve filter handling, maybe find some other way to do it
     public function mapAction()
     {
         $settings = $this->settings;
         $settings = $this->getMapFilterRestriction($settings);
-        if(!empty($settings['flex']['filter']['group']) || !empty($settings['flex']['filter']['categories'])){
-            $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
-            //Set the right indexIds
-            foreach ($filteredEvents as $event){
-                $uids[] = $event['uid'];
-            }
-            $uidList = implode(',',$uids);
-            $events =  $this->indexRepository->findNextEvents($uidList);
-        }else{
-            $events =  $this->indexRepository->findNextEvents();
+        //we could use also findAll if we dont have filter settings could be a bit more performant
+        $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
+        //Set the right indexIds
+        foreach ($filteredEvents as $event){
+            $uids[] = $event['uid'];
         }
+        $uidList = implode(',',$uids);
+
+        $events =  $this->indexRepository->findNextEvents($uidList);
         $events = $events->toArray();
+
         $this->createGoogleMap($settings,$events);
+
         $this->view->assignMultiple(array(
             'map' => $settings['flex']['map']
         ));
@@ -257,7 +253,11 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     protected function createGoogleMap($settings,$events){
         /** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRender */
         $pageRender = $this->objectManager->get('TYPO3\CMS\Core\Page\PageRenderer');
-        $marker = $this->generateMarker($events,$settings);
+
+        //generate marker only when we had some event
+        if(count($events) > 0){
+            $marker = $this->generateMarker($events,$settings);
+        }
 
         $googleApi = 'https://maps.googleapis.com/maps/api/js?key=' .$settings['google']['apiKey'];
         $pageRender->addHeaderData('<script  src="'.$googleApi.'"></script>');
@@ -286,7 +286,6 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $event = $events;
             /** @var \TGM\TgmGce\Domain\Model\Events $eventOrigin */
             $eventOrigin = $event->getOriginalObject();
-
             $mapJs ='
             function initMap() {
                 var map = new google.maps.Map(document.getElementById("map"), {
