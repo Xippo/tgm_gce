@@ -46,16 +46,20 @@ class EventsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         //Evaluate Filter settings from Plugin
         $filterConstraints = $this->evaluateFilterAndBuildConstraint($filter);
-        $query->matching($query->logicalAnd(
-            $query->logicalOr($constraints),
-            $filterConstraints
-        ));
+        if(!empty($filterConstraints)){
+            $query->matching($query->logicalAnd(
+                $query->logicalOr($constraints),
+                $filterConstraints
+            ));
+        }else{
+            $query->matching($query->logicalOr($constraints));
+        }
         return $query->execute($raw);
     }
 
     /**
      * @param $filter array
-     * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\AndInterface|\TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface
+     * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\AndInterface|\TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface|null
      */
     protected function evaluateFilterAndBuildConstraint($filter){
         $query = $this->createQuery();
