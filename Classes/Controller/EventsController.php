@@ -254,23 +254,20 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         /** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRender */
         $pageRender = $this->objectManager->get('TYPO3\CMS\Core\Page\PageRenderer');
 
-        //generate marker only when we had some event
-        if(count($events) > 0){
-            $marker = $this->generateMarker($events,$settings);
-        }
+        $marker = $this->generateMarker($events, $settings);
 
-        $googleApi = 'https://maps.googleapis.com/maps/api/js?key=' .$settings['google']['apiKey'];
-        $pageRender->addHeaderData('<script  src="'.$googleApi.'"></script>');
+        $googleApi = 'https://maps.googleapis.com/maps/api/js?key=' . $settings['google']['apiKey'];
+        $pageRender->addHeaderData('<script  src="' . $googleApi . '"></script>');
 
-        if(is_array($events)){
-            $mapJs ='
-                function initMap() {
+        if (is_array($events)) {
+            $mapJs = '
+            function initMap() {
                 var gm = google.maps;
                 // Create a map object and specify the DOM element for display.
                 var map = new google.maps.Map(document.getElementById("map"), {
-                        center: {lat: '. $settings['flex']['map']['lat'] .', lng: ' .$settings['flex']['map']['lon']. '},
-                        scrollwheel: true,
-                        zoom: '. $settings['flex']['map']['zoom'] .'
+                        center: {lat: ' . $settings['flex']['map']['lat'] . ', lng: ' . $settings['flex']['map']['lon'] . '} ,
+                        scrollwheel: true ,
+                        zoom: ' . $settings['flex']['map']['zoom'] . '
                     });
                 var oms = new OverlappingMarkerSpiderfier(map,{keepSpiderfied:true});
                 var iw = new gm.InfoWindow();
@@ -278,25 +275,25 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                   iw.setContent(marker.desc);
                   iw.open(map, marker);
                 });
-                '. $marker .'
+                ' . $marker . '
             }';
             $pageRender->addHeaderData('<script src="typo3conf/ext/tgm_gce/Resources/Public/Js/overlappingMarkerSpiderfier.min.js"></script>');
-        }else{
+        } else {
             /** @var \TGM\TgmGce\Domain\Model\Index $event */
             $event = $events;
             /** @var \TGM\TgmGce\Domain\Model\Events $eventOrigin */
             $eventOrigin = $event->getOriginalObject();
-            $mapJs ='
+            $mapJs = '
             function initMap() {
                 var map = new google.maps.Map(document.getElementById("map"), {
                     center: {lat: ' . $eventOrigin->getLat() . ', lng: ' . $eventOrigin->getLon() . '},
-                    scrollwheel: true,
-                    zoom: '. $settings['flex']['map']['zoom'] .'
+                    scrollwheel: true ,
+                    zoom: ' . $settings['flex']['map']['zoom'] . '
                 });
-                ' .$marker. '
+                ' . $marker . '
             }';
         }
-        $pageRender->addJsFooterInlineCode('map',$mapJs);
+        $pageRender->addJsFooterInlineCode('map', $mapJs);
         // Init the map, onload is important for the spider script
         $pageRender->addFooterData('<script> window.onload = function () {initMap();}</script>');
     }
@@ -310,31 +307,37 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             foreach ($events as $event){
                 /** @var \TGM\TgmGce\Domain\Model\Events $eventOrigin */
                 $eventOrigin = $event->getOriginalObject();
-                $markerJS .= "
-                var contentString = '" . str_replace("'",'"',preg_replace( "/\r|\n/", "", (string)$standaloneViewRenerer->renderStandaloneTempl('Maps/Marker/','Info',array('event'=>$event,'settings'=>$settings),$this->controllerContext))) . "';
-              
-                var marker" . $markerNumber . " = new google.maps.Marker({
-                    position: {lat: " . $eventOrigin->getLat() . ", lng: " . $eventOrigin->getLon() . "},
-                    map: map,
-                    title: '" . $eventOrigin->getTitle() . "'
-                });
-                marker" . $markerNumber . ".desc = contentString;
-                oms.addMarker(marker" . $markerNumber . "); 
-                ";
-                $markerNumber++;
+                //Avoid to try to generate the marker if no coordinates. Will generate js error if no coords are stored
+                if(!empty($eventOrigin->getLat()) && !empty($eventOrigin->getLon())){
+                    $markerJS .= "
+                        var contentString = '" . str_replace("'",'"',preg_replace( "/\r|\n/", "", (string)$standaloneViewRenerer->renderStandaloneTempl('Maps/Marker/','Info',array('event'=>$event,'settings'=>$settings),$this->controllerContext))) . "';
+                        
+                        var marker" . $markerNumber . " = new google.maps.Marker({
+                            position: {lat: " . $eventOrigin->getLat() . ", lng: " . $eventOrigin->getLon() . "},
+                            map: map,
+                            title: '" . $eventOrigin->getTitle() . "'
+                        });
+                        marker" . $markerNumber . ".desc = contentString;
+                        oms.addMarker(marker" . $markerNumber . "); 
+                        ";
+                    $markerNumber++;
+                }
             }
         }else{
             /** @var \TGM\TgmGce\Domain\Model\Index $event */
             $event = $events;
             /** @var \TGM\TgmGce\Domain\Model\Events $eventOrigin */
             $eventOrigin = $event->getOriginalObject();
-            $markerJS .= "
-                var marker = new google.maps.Marker({
-                    position: {lat: " . $eventOrigin->getLat() . ", lng: " . $eventOrigin->getLon() . "},
-                    map: map,
-                    title: '" . $eventOrigin->getStreet() . "'
-                });
-            ";
+            //Avoid to try to generate the marker if no coordinates. Will generate js error if no coords are stored
+            if(!empty($eventOrigin->getLat()) && !empty($eventOrigin->getLon())) {
+                $markerJS .= "
+                    var marker = new google.maps.Marker({
+                        position: {lat: " . $eventOrigin->getLat() . ", lng: " . $eventOrigin->getLon() . "},
+                        map: map,
+                        title: '" . $eventOrigin->getStreet() . "'
+                    });
+                ";
+            }
         }
         return $markerJS;
     }
