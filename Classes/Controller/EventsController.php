@@ -27,11 +27,8 @@ namespace TGM\TgmGce\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use HDNET\Calendarize\Domain\Model\Index;
-use Symfony\Component\Debug\Debug;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use TYPO3\CMS\Lang\Service\TranslationService;
 
 /**
  * EventsController
@@ -98,9 +95,8 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         foreach ($filteredEvents as $event){
             $uids[] = $event['uid'];
         }
-        if(count($uids) > 0){
-            $indices = $this->indexRepository->findByEventUids($uids,$limit);
-        }
+
+        $indices = $this->indexRepository->findByEventUids($uids,$limit);
 
         $this->view->assignMultiple(array(
             'indices' => $indices,
@@ -115,14 +111,17 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $settings = $this->getMapFilterRestriction($settings);
         //we could use also findAll if we dont have filter settings could be a bit more performant
         $filteredEvents = $this->eventsRepository->findByGroupAndCats($settings['flex']['filter'],true);
+
         //Set the right indexIds
         foreach ($filteredEvents as $event){
             $uids[] = $event['uid'];
         }
-        $uidList = implode(',',$uids);
 
-        $events =  $this->indexRepository->findNextEvents($uidList);
-        $events = $events->toArray();
+        if(!empty($uids)){
+            $uidList = implode(',',$uids);
+            $events =  $this->indexRepository->findNextEvents($uidList);
+            $events = $events->toArray();
+        }
 
         $this->createGoogleMap($settings,$events);
 
@@ -253,12 +252,14 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     protected function createGoogleMap($settings,$events){
         /** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRender */
         $pageRender = $this->objectManager->get('TYPO3\CMS\Core\Page\PageRenderer');
-
-        $marker = $this->generateMarker($events, $settings);
-
+        //init empty marker
+        $marker='';
+        //only if we have events we generate markers 
+        if(!empty($events)){
+            $marker = $this->generateMarker($events, $settings);
+        }
         $googleApi = 'https://maps.googleapis.com/maps/api/js?key=' . $settings['google']['apiKey'];
         $pageRender->addHeaderData('<script  src="' . $googleApi . '"></script>');
-
         if (is_array($events)) {
             $mapJs = '
             function initMap() {
@@ -278,7 +279,7 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                 ' . $marker . '
             }';
             $pageRender->addHeaderData('<script src="typo3conf/ext/tgm_gce/Resources/Public/Js/overlappingMarkerSpiderfier.min.js"></script>');
-        } else {
+        } elseif(!empty($events)) {
             /** @var \TGM\TgmGce\Domain\Model\Index $event */
             $event = $events;
             /** @var \TGM\TgmGce\Domain\Model\Events $eventOrigin */
@@ -291,6 +292,18 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
                     zoom: ' . $settings['flex']['map']['zoom'] . '
                 });
                 ' . $marker . '
+            }';
+        }else{
+            //empty map
+            $mapJs = '
+            function initMap() {
+                var gm = google.maps;
+                // Create a map object and specify the DOM element for display.
+                var map = new google.maps.Map(document.getElementById("map"), {
+                        center: {lat: ' . $settings['flex']['map']['lat'] . ', lng: ' . $settings['flex']['map']['lon'] . '} ,
+                        scrollwheel: true ,
+                        zoom: ' . $settings['flex']['map']['zoom'] . '
+                    });
             }';
         }
         $pageRender->addJsFooterInlineCode('map', $mapJs);
