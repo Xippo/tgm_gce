@@ -95,8 +95,9 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         foreach ($filteredEvents as $event){
             $uids[] = $event['uid'];
         }
-
-        $indices = $this->indexRepository->findByEventUids($uids,$limit);
+        if(!empty($uids)){
+            $indices = $this->indexRepository->findByEventUids($uids,$limit);
+        }
 
         $this->view->assignMultiple(array(
             'indices' => $indices,
