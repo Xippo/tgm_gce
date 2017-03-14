@@ -1,86 +1,107 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-11-14T16:14:42Z" product-name="tgm_gce">
+	<file source-language="en" target-language="de" original="messages" date="2016-11-14T16:14:42Z" product-name="tgm_gce">
 		<header/>
 		<body>
 			<trans-unit id="tx_tgmgce_domain_model_events">
 				<source>Events</source>
+				<target>Veranstaltung</target>
 			</trans-unit>
-			<trans-unit id="mail.subject">
-				<source>Request for the Event: ###title### (###date###)</source>
+			<trans-unit id="tx_tgmgce_domain_model_events.date">
+				<source>Date Options</source>
+				<target>Datum</target>
 			</trans-unit>
-			<trans-unit id="mailconf.subject">
-				<source>Thanks for your request for the event: ###title### (###date###)</source>
-			</trans-unit>
-			<trans-unit id="mail.success">
-				<source>Thanks for your request, we will contact you soon as possible</source>
-			</trans-unit>
-			<trans-unit id="mail.error">
-				<source>During the sending proccess occurred a error, please try again </source>
-			</trans-unit>
-            <trans-unit id="no_events">
-                <source>There are no events in the current view.</source>
-            </trans-unit>
-            <trans-unit id="more">
-                <source>Show event</source>
-            </trans-unit>
-            <trans-unit id="back">
-                <source>Back</source>
-            </trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.title">
 				<source>Title</source>
+				<target>Titel</target>
 			</trans-unit>
-
 			<trans-unit id="tx_tgmgce_domain_model_events.description">
 				<source>Description</source>
+				<target>Beschreibung</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.image">
 				<source>Image</source>
+				<target>Bild</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.form">
 				<source>Form</source>
+				<target>Anmeldeformular</target>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.location">
+				<source>Location</source>
+				<target>Ort</target>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.contact">
+				<source>Contact</source>
+				<target>Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.form.empty">
+				<source>No Form</source>
+				<target>Kein Formular anzeigen</target>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.form.standard">
+				<source>Standard</source>
+				<target>Standard</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.form_receiver_mail">
 				<source>Form Receiver Mail</source>
+				<target>Empfänger der Anmeldung</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.name">
 				<source>Name</source>
+				<target>Name</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.surname">
 				<source>Surname</source>
+				<target>Nachname</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.email">
-				<source>Email</source>
+				<source>E-Mail</source>
+				<target>E-Mail</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.salutation">
 				<source>Salutation</source>
+				<target>Anrede</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.tel">
 				<source>Tel</source>
+				<target>Tel.</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.street">
 				<source>Street</source>
+				<target>Straße</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.zip">
 				<source>Zip</source>
+				<target>PLZ</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.city">
 				<source>City</source>
+				<target>Stadt</target>
+			</trans-unit>
+			<trans-unit id="tx_tgmgce_domain_model_events.country">
+				<source>Country</source>
+				<target>Land</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.lon">
 				<source>Lon</source>
+				<target>Lon</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.lat">
 				<source>Lat</source>
+				<target>Lat</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.gruppe">
 				<source>Group</source>
+				<target>Gruppe</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_eventgroup">
 				<source>Event Group</source>
+				<target>Veranstaltungsgruppe</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_eventgroup.name">
 				<source>Name</source>
+				<target>Name</target>
 			</trans-unit>
 		</body>
 	</file>
