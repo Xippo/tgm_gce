@@ -45,7 +45,7 @@
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.form_receiver_mail">
 				<source>Form Receiver Mail</source>
-				<target>Empfänger der Anmeldung</target>
+				<target>Empfänger E-Mail der Anmeldung</target>
 			</trans-unit>
 			<trans-unit id="tx_tgmgce_domain_model_events.name">
 				<source>Name</source>
