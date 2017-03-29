@@ -13,4 +13,7 @@
 - 0.0.4 
     - Bugfix: we don't try anymore to show hidden events, which caused a exception (commit #13997ee ).   
     - Bugfix: Avoid marker generation if no coords are given.
+- 0.0.5 
+    - Add RealUrl Utility
+    - Documentation: Add RealUrl example configuration 
     
