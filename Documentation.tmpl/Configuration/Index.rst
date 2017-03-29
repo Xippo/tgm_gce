@@ -11,7 +11,11 @@
 Configuration
 =======================
 
+.. toctree::
+	:maxdepth: 5
+	:titlesonly:
 
+    	RealUrl/Index
 
 .. _configuration-templates:
 
