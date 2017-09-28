@@ -1,7 +1,7 @@
 # TgM Google Calendarize Events
 
 
-##Changelog 
+## Changelog 
 - 0.0.1 alpha
     - Initial Commit
 - 0.0.2 
