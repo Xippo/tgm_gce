@@ -1,4 +1,4 @@
-# tgm_gce
+# TgM Google Calendarize Events
 
 
 ##Changelog 
