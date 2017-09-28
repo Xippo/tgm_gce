@@ -16,4 +16,5 @@
 - 0.0.5 
     - Add RealUrl Utility
     - Documentation: Add RealUrl example configuration 
-    
+- 0.0.6 
+    - ADD Plugin Option where you can choose if recurring events will be shown only one time

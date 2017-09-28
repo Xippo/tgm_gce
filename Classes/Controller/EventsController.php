@@ -99,6 +99,23 @@ class EventsController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             $indices = $this->indexRepository->findByEventUids($uids,$limit);
         }
 
+        if($settings['flex']['event']['displayRecurringOnlyOnce']==1) {
+
+            $tempIndices = [];
+            if($indices){
+                /** @var \TGM\TgmGce\Domain\Model\Index $index */
+                foreach($indices as $index) {
+                    if(false === isset($tempIndices[$index->getForeignUid()])) {
+                        $tempIndices[$index->getForeignUid()] = $index;
+                    } else {
+                        continue;
+                    }
+                }
+                $indices = $tempIndices;
+            }
+
+        }
+
         $this->view->assignMultiple(array(
             'indices' => $indices,
             'settings' => $settings,

@@ -51,6 +51,23 @@
                             </config>
                         </TCEforms>
                     </settings.flex.event.itemLimit>
+                    <settings.flex.event.displayRecurringOnlyOnce>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:tgm_gce/Resources/Private/Language/locallang_be.xlf:tx_tgmgce_flex.input.displayRecurringOnlyOnce
+                            </label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Events->list</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Events->filter;Events->list</numIndex>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>check</type>
+                                <default>0</default>
+                            </config>
+                        </TCEforms>
+                    </settings.flex.event.displayRecurringOnlyOnce>
                     <settings.flex.event.detail>
                         <TCEforms>
                             <label>
