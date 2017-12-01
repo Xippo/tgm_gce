@@ -8,19 +8,27 @@ class RealUrlGceUtility {
 
     public function getTitle($params)
     {
-        /** @var \TYPO3\CMS\Core\Database\DatabaseConnection $DB */
-        $DB = $GLOBALS['TYPO3_DB'];
-        $foreignUid =  $DB->exec_SELECTgetSingleRow('foreign_uid', 'tx_calendarize_domain_model_index', 'uid=' . $params['value'])['foreign_uid'];
-        $title =  $DB->exec_SELECTgetSingleRow('title', 'tx_tgmgce_domain_model_events', 'uid=' . $foreignUid)['title'];
-        $urlSegment = $title . '-' .$params['value'];
         /** @var \DmitryDulepov\Realurl\Encoder\UrlEncoder  $realurlObj */
+        //DebuggerUtility::var_dump($params);
         $realurlObj = $params['pObj'];
-        /** @var ConfigurationReader $conf */
-        $conf = $realurlObj->getConfiguration();
-        $conf->getGetVarsToSet();
-        $spaceChar = $conf->get('pagePath')['spaceCharacter'];
-        $urlSegment = $this->encodeTitle($urlSegment,$spaceChar);
-        return $urlSegment;
+        //DebuggerUtility::var_dump($params);
+        if(is_a($realurlObj,\DmitryDulepov\Realurl\Encoder\UrlEncoder::class)){
+            /** @var \TYPO3\CMS\Core\Database\DatabaseConnection $DB */
+            $DB = $GLOBALS['TYPO3_DB'];
+            $foreignUid =  $DB->exec_SELECTgetSingleRow('foreign_uid', 'tx_calendarize_domain_model_index', 'uid=' . $params['value'])['foreign_uid'];
+            $title =  $DB->exec_SELECTgetSingleRow('title', 'tx_tgmgce_domain_model_events', 'uid=' . $foreignUid)['title'];
+            $urlSegment = $title . '-' .$params['value'];
+
+            /** @var ConfigurationReader $conf */
+            $conf = $realurlObj->getConfiguration();
+            $conf->getGetVarsToSet();
+            $spaceChar = $conf->get('pagePath')['spaceCharacter'];
+            $urlSegment = $this->encodeTitle($urlSegment,$spaceChar);
+            return $urlSegment;
+        }else{
+            //DebuggerUtility::var_dump($params);
+           return (int)substr($params['origValue'],(strrpos($params['origValue'],'-')+1));
+        }
     }
 
     public function encodeTitle($title,$spaceChar) {
