@@ -57,6 +57,12 @@ class EventsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->execute($raw);
     }
 
+    public function findByUid($uid)
+    {
+        $query = $this->createQuery();
+        return $query->matching($query->equals('uid', $uid))->execute()->getFirst();
+    }
+
     /**
      * @param $filter array
      * @return \TYPO3\CMS\Extbase\Persistence\Generic\Qom\AndInterface|\TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface|null
