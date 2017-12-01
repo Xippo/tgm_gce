@@ -7,16 +7,16 @@ class tx_tgmgce_tcemainproc {
 				$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
                 /** @var \TGM\TgmGce\Domain\Repository\EventsRepository $eventRepository */
 				$eventRepository = $objectManager->get('TGM\TgmGce\Domain\Repository\EventsRepository');
-
-				$querySettings = $objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
+				/** @var \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings $querySettings */
+				$querySettings = $eventRepository->createQuery()->getQuerySettings();
 				$querySettings->setIgnoreEnableFields(TRUE);
+				$querySettings->setRespectStoragePage(false);
 				$eventRepository->setDefaultQuerySettings($querySettings);
 
                 if($status=='new'){
                     //Die persitierte id der unterstüzung
                     $id = $reference->substNEWwithIDs[$id];
                 }
-
 				/** @var \TGM\TgmGce\Domain\Model\Events $event */
 				$event = $eventRepository->findByUid($id);
 				if(($coords = \TGM\TgmGce\Utility\GeoGoogleUtility::getCoordsFromGoogle($event->getZip(), $event->getCity(), $event->getStreet(), $event->getCountry())) !== FALSE) {
